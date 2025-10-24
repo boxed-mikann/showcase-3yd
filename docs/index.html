@@ -6,8 +6,35 @@
   <title>インテリア3Dモデルビューワー</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body { text-align: center; margin: 2em; }
-    model-viewer { width: 600px; height: 400px; }
+    body { 
+      margin: 0;
+      padding: 1em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      box-sizing: border-box;
+    }
+    h1 {
+      margin: 0.5em 0;
+    }
+    model-viewer { 
+      width: 90vw;
+      max-width: 1200px;
+      height: 70vh;
+      min-height: 400px;
+      margin: 1em auto;
+    }
+    p {
+      margin: 0.5em 0;
+    }
+    @media (max-width: 768px) {
+      model-viewer {
+        width: 95vw;
+        height: 60vh;
+        min-height: 300px;
+      }
+    }
   </style>
 </head>
 <body>
