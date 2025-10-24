@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="robots" content="noindex">
-  <title>インテリア3Dモデルビューワー</title>
+  <title>用木大3Dモデルビューワー</title>
+  <meta property="og:title" content="用木大3Dモデルビューワー">
+  <meta property="og:description" content="用木大の3Dモデルをブラウザで閲覧できます">
+  <meta property="og:image" content="https://yourdomain.com/image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     body { text-align: center; margin: 2em; }
@@ -11,8 +16,8 @@
   </style>
 </head>
 <body>
-  <h1>インテリア3Dモデル</h1>
-  <model-viewer src="youbokudai.fbx" camera-controls auto-rotate background-color="#fff"></model-viewer>
+  <h1>用木大3Dモデル</h1>
+  <model-viewer src="youbokudai.glb" camera-controls auto-rotate background-color="#fff"></model-viewer>
   <p>マウスで回転・拡大縮小できます</p>
 </body>
 </html>
