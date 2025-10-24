@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>インテリア3Dモデルビューワー</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body { text-align: center; margin: 2em; }
+    model-viewer { width: 600px; height: 400px; }
+  </style>
+</head>
+<body>
+  <h1>インテリア3Dモデル</h1>
+  <model-viewer src="room.glb" camera-controls auto-rotate background-color="#fff"></model-viewer>
+  <p>マウスで回転・拡大縮小できます</p>
+</body>
+</html>
