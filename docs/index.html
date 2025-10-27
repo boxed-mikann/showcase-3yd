@@ -33,6 +33,16 @@
     p {
       margin: 0.5em 0;
     }
+    .model-selector {
+      margin: 1em 0;
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .model-selector label {
+      cursor: pointer;
+    }
     @media (max-width: 768px) {
       model-viewer {
         width: 95vw;
@@ -44,7 +54,23 @@
 </head>
 <body>
   <h1>用木大3Dモデル</h1>
+  <div class="model-selector">
+    <label><input type="radio" name="model" value="youbokudai.glb"> モデル1</label>
+    <label><input type="radio" name="model" value="youbokudai2.glb"> モデル2</label>
+    <label><input type="radio" name="model" value="youbokudai3.glb"> モデル3</label>
+    <label><input type="radio" name="model" value="youbokudai4.glb"> モデル4</label>
+    <label><input type="radio" name="model" value="youbokudai5.glb"> モデル5</label>
+    <label><input type="radio" name="model" value="youbokudai6.glb"> モデル6</label>
+    <label><input type="radio" name="model" value="youbokudai7.glb" checked> モデル7</label>
+  </div>
   <model-viewer src="youbokudai7.glb" camera-controls auto-rotate background-color="#fff"></model-viewer>
   <p>マウスで回転・拡大縮小できます</p>
+  <script>
+    document.querySelectorAll('input[name="model"]').forEach(radio => {
+      radio.addEventListener('change', e => {
+        document.querySelector('model-viewer').src = e.target.value;
+      });
+    });
+  </script>
 </body>
 </html>
