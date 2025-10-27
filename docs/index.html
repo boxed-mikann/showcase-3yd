@@ -63,7 +63,10 @@
     <label><input type="radio" name="model" value="youbokudai6.glb"> モデル6</label>
     <label><input type="radio" name="model" value="youbokudai7.glb" checked> モデル7</label>
   </div>
-  <model-viewer src="youbokudai7.glb" camera-controls auto-rotate background-color="#fff"></model-viewer>
+  <div class="model-selector">
+    <label><input type="checkbox" id="auto-rotate-toggle"> 自動回転</label>
+  </div>
+  <model-viewer src="youbokudai7.glb" camera-controls background-color="#fff"></model-viewer>
   <p>マウスで回転・拡大縮小できます</p>
   <script>
     const viewer = document.querySelector('model-viewer');
@@ -71,6 +74,15 @@
       radio.addEventListener('change', e => {
         viewer.setAttribute('src', e.target.value);
       });
+    });
+    
+    const autoRotateToggle = document.getElementById('auto-rotate-toggle');
+    autoRotateToggle.addEventListener('change', e => {
+      if (e.target.checked) {
+        viewer.setAttribute('auto-rotate', '');
+      } else {
+        viewer.removeAttribute('auto-rotate');
+      }
     });
   </script>
 </body>
