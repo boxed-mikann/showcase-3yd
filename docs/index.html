@@ -66,9 +66,10 @@
   <model-viewer src="youbokudai7.glb" camera-controls auto-rotate background-color="#fff"></model-viewer>
   <p>マウスで回転・拡大縮小できます</p>
   <script>
+    const viewer = document.querySelector('model-viewer');
     document.querySelectorAll('input[name="model"]').forEach(radio => {
       radio.addEventListener('change', e => {
-        document.querySelector('model-viewer').src = e.target.value;
+        viewer.setAttribute('src', e.target.value);
       });
     });
   </script>
