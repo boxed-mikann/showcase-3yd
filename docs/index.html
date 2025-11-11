@@ -131,11 +131,11 @@
     }
 
     function applyBrightness(percent) {
-      const hex = brightnessToHex(percent);
-      // model-viewer accepts background-color attribute
-      viewer.setAttribute('background-color', hex);
-      // update visible label
-      brightnessValueLabel.textContent = `${percent}%`;
+    const hex = brightnessToHex(percent);
+    // setAttribute の代わりに style.backgroundColor を使用
+    viewer.style.backgroundColor = hex;
+    // update visible label
+    brightnessValueLabel.textContent = `${percent}%`;
     }
 
     // Initialize from default value (100%)
