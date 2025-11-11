@@ -43,11 +43,30 @@
     .model-selector label {
       cursor: pointer;
     }
+    .controls {
+      display: flex;
+      gap: 1em;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 0.5em;
+    }
+    .brightness-control {
+      display: flex;
+      gap: 0.5em;
+      align-items: center;
+    }
+    .brightness-control input[type="range"] {
+      width: 200px;
+    }
     @media (max-width: 768px) {
       model-viewer {
         width: 95vw;
         height: 60vh;
         min-height: 300px;
+      }
+      .brightness-control input[type="range"] {
+        width: 140px;
       }
     }
   </style>
@@ -65,19 +84,32 @@
     <label><input type="radio" name="model" value="youbokudai8.glb" checked> 7黒地壁絵</label>
     <label><input type="radio" name="model" value="youbokudai9.glb" > 西屋台イメージ</label>
   </div>
-  <div class="model-selector">
-    <label><input type="checkbox" id="auto-rotate-toggle"> 自動回転</label>
+
+  <div class="controls">
+    <div class="model-selector">
+      <label><input type="checkbox" id="auto-rotate-toggle"> 自動回転</label>
+    </div>
+
+    <div class="brightness-control" title="背景の明るさを調整します">
+      <label for="brightness-range">背景の明るさ</label>
+      <input id="brightness-range" type="range" min="0" max="100" value="100" step="1" aria-label="背景の明るさ">
+      <span id="brightness-value">100%</span>
+    </div>
   </div>
+
   <model-viewer src="youbokudai8.glb" camera-controls background-color="#fff"></model-viewer>
   <p>マウスで回転・拡大縮小できます</p>
   <script>
     const viewer = document.querySelector('model-viewer');
+
+    // Model radio buttons
     document.querySelectorAll('input[name="model"]').forEach(radio => {
       radio.addEventListener('change', e => {
         viewer.setAttribute('src', e.target.value);
       });
     });
-    
+
+    // Auto-rotate toggle
     const autoRotateToggle = document.getElementById('auto-rotate-toggle');
     autoRotateToggle.addEventListener('change', e => {
       if (e.target.checked) {
@@ -85,6 +117,32 @@
       } else {
         viewer.removeAttribute('auto-rotate');
       }
+    });
+
+    // Brightness slider: converts 0-100% to a grayscale hex (#000..#fff)
+    const brightnessRange = document.getElementById('brightness-range');
+    const brightnessValueLabel = document.getElementById('brightness-value');
+
+    function brightnessToHex(percent) {
+      // percent: 0..100 -> 0..255
+      const v = Math.round(Math.max(0, Math.min(100, percent)) * 2.55);
+      const hex = v.toString(16).padStart(2, '0');
+      return `#${hex}${hex}${hex}`;
+    }
+
+    function applyBrightness(percent) {
+      const hex = brightnessToHex(percent);
+      // model-viewer accepts background-color attribute
+      viewer.setAttribute('background-color', hex);
+      // update visible label
+      brightnessValueLabel.textContent = `${percent}%`;
+    }
+
+    // Initialize from default value (100%)
+    applyBrightness(parseInt(brightnessRange.value, 10));
+
+    brightnessRange.addEventListener('input', (e) => {
+      applyBrightness(e.target.value);
     });
   </script>
 </body>
